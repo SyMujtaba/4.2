@@ -1,0 +1,57 @@
+
+ const express = require('express');
+ const bodyParser = require('body-parser');
+ const app = express();
+ app.use(bodyParser.urlencoded({ extended: true }));
+
+ const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/cricket', { useNewUrlParser: true });
+
+
+const cricketSchema = new mongoose.Schema({
+    name: { type: String, required: true },
+    age: { type: Number, required: true },
+    batting order: { type: String, required: true },
+    cricket team: { type: String, required: true }
+    });
+
+// Add content
+app.post('/cricketplayer', (req, res) => {
+  const { title, body } = req.body;
+  const cricketplayer = new Cricketplayer({ title, body });
+  content.save((err) => {
+    if (err) {
+      res.status(500).send('Error adding cricketplayer');
+    } else {
+      res.status(200).send('cricketplayer added successfully');
+    }
+  });
+});
+
+// Update content
+app.put('/cricketplayer/:id', (req, res) => {
+  const { title, body } = req.body;
+  Content.findByIdAndUpdate(req.params.id, { title, body }, (err) => {
+    if (err) {
+      res.status(500).send('Error updating cricketplayer');
+    } else {
+      res.status(200).send('cricketplayer updated successfully');
+    }
+  });
+});
+
+// Delete content
+app.delete('/cricketplayer/:id', (req, res) => {
+  cricketplayer.findByIdAndDelete(req.params.id, (err) => {
+    if (err) {
+      res.status(500).send('Error deleting cricketplayer');
+    } else {
+      res.status(200).send('cricketplayer deleted successfully');
+    }
+  });
+});
+
+// Start the server
+app.listen(3000, () => {
+  console.log('Server started on port 3000');
+});
